@@ -1,0 +1,94 @@
+const _ = {
+clamp (num1, num2, num3) {
+  let lowerClampedValue = Math.max(num1, num2);
+  let clampedValue = Math.min(lowerClampedValue, num3);
+  return clampedValue;
+},
+  
+inRange(x, y, z){
+  if (z === undefined){
+    z=y;
+    y=0;
+  }
+  if (y>z){
+    let endValue = z;
+    z = y;
+    y = endValue;
+  }
+  let isInRange = y<=x && x<z;
+  return isInRange;
+},
+  
+  words(arr){
+   let newArray = arr.split(' ');
+    return newArray;
+  },
+  
+  pad(string, length){
+    if (string.length >= length){
+      return string;
+    }
+  const startPad = Math.floor((length-string.length)/2);
+    const endPad = length - string.length - startPad;
+    const paddedString = ' '.repeat(startPad) + string + ' '.repeat(endPad);
+    return paddedString;
+  },
+  
+  has(object, key){
+    let hasValue = object[key];
+    if (hasValue != undefined) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  
+  invert(object){
+    invertedObject = {};
+      for (let key in object){
+        const originalValue = object[key];
+        invertedObject = {originalValue: key};
+    }
+    return invertedObject;
+  },
+  
+  findKey(object, predicate){
+    for (let key in object){
+     let value = object[key];
+      const predicateReturnValue = predicate(value);
+      if (predicateReturnValue === true){
+        return key;
+      }
+      return undefined;
+    }
+  },
+  
+  drop(arr, n){
+    if(n===undefined){
+      n=1;
+    }
+    let droppedArray = arr.slice(n, arr.length);
+    return droppedArray;
+  },
+  
+ dropWhile(arr, predicate){
+    const func = (element, index)=>{
+      return !predicate(element, index, arr);    
+    }
+    let dropNumber = arr.findIndex(func);
+    let droppedArr = this.drop(arr, dropNumber);
+    return droppedArr;
+  },
+  
+  chunk(arr, size){
+    if (size===undefined){
+      size=1;
+    }
+    let arrayChunks = []
+    for (let i=0; i<arr.length; i+=size){
+    let arrayChunk =arr.slice(i, i+size);
+    arrayChunks.push(arrayChunk);
+    }
+    return arrayChunks;
+  }
+}
